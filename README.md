@@ -72,9 +72,28 @@ insert into user(email, password) values('toto@lafrite.fr', '1234');
 -   [x] On a importé notre fichier de configuration de la db
 -   [x] On a fait notre logique de recherche utilisateur dans notre fichier `index.ts`
 
+#### Vérification du mot de passe
+
+-   [x] Nous avons installé le package `argon2` pour vérifier le mot de passe de l'utilisateur.
+-   [x] Nous avons ajouté un middleware pour vérifier le mot de passe avant de renvoyer l'user.
+    -   Toutes les informations sont dans le fichier [hashPwd.ts](./server/middlewares/hashPwd.ts)
+
 ### Register
 
 -   [x] Nous avons ajouté un endpoint pour le register
 -   [x] Sur le même principe que le `login`, nous avons ajouter un utilisateur dans notre db.
--   [ ] Nous allons devoir hasher le mot de passe de l'utilisateur avant de l'ajouter dans la db.
+-   [x] Nous allons devoir hasher le mot de passe de l'utilisateur avant de l'ajouter dans la db.
 -   [ ] Nous devons créer un token pour l'utilisateur qui vient de se loguer.
+
+#### Hash du mot de passe
+
+-   [x] Nous avons installé le package `argon2` pour hasher le mot de passe de l'utilisateur.
+-   [x] Nous avons ajouté un middleware pour hasher le mot de passe avant de l'ajouter dans la db.
+    -   Toutes les informations sont dans le fichier [hashPwd.ts](./server/middlewares/hashPwd.ts)
+
+### Types
+
+Attention, dans notre middleware, nous ajoutons une clé `user` dans notre objet `req`. Pour éviter les erreurs, nous allons surcharger le type de notre objet `req`.
+
+-   [x] Nous avons surchargé le type de notre objet `req`.
+    -   Toutes les informations sont dans le fichier [index.d.ts](./server/types/index.d.ts)
