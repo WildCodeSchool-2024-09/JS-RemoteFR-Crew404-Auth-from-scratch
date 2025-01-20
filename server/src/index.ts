@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+import connection from "../database/config";
 
 const app = express();
 const port = 3310;
@@ -27,7 +28,47 @@ app.use(express.json());
  * Methode: POST
  */
 app.post("/login", (req: Request, res: Response) => {
-	res.json({ response: "il existe 🤟" });
+	connection.query(
+		"SELECT * FROM user WHERE email= ?",
+		[req.body.email],
+		function (err, results: any[], fields) {
+			if (
+				results.length !== 0 &&
+				req.body.password === results[0].password
+			) {
+				// Ici, j'ai bien un user, mais je n'ai pas testé si le MDP est juste, je vais donc le faire.
+
+				// À la fin, je retourne mon user
+				res.json({ response: results[0] });
+				return;
+			}
+
+			res.json({ response: "Y'a degun" });
+		}
+	);
+});
+
+/**
+ * Route de register
+ * Path: /register"
+ * Action: callBack
+ * Methode: POST
+ */
+app.post("/register", (req: Request, res: Response) => {
+	const { email, password } = req.body;
+
+	connection.query(
+		"INSERT INTO user (email, password) VALUES (?,?)",
+		[email, password],
+
+		function (err, results: any, fields) {
+			if (results.affectedRows !== 1) {
+				res.json({ error: "error server" });
+				return;
+			}
+			res.json({ response: "Youhou ! Ça fonctionne !" });
+		}
+	);
 });
 
 /**

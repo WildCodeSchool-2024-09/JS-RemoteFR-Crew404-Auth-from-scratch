@@ -56,3 +56,27 @@ Et notre but, c'est de faire ça :
 ![v1](./docs/auth_login.png)
 
 Nous allons donc installer un module npmjs pour configurer notre bdd et ainsi pouvoir faire des requêtes sur celle ci.
+
+-   [x] Le package que nous avons installé est `mysql2` et nous avons créé un fichier de configuration expres pour lui.
+    -   Nous avons créé une db
+
+```sql
+create table user(id int auto_increment not null primary key, email varchar(50) not null, password varchar(50) not null);
+```
+
+-   [x] Nous avons ajouté un utilisateur
+
+```sql
+insert into user(email, password) values('toto@lafrite.fr', '1234');
+```
+
+-   [x] Nous avons ajouté un endpoint pour le login
+-   [x] On a importé notre fichier de configuration de la db
+-   [x] On a fait notre logique de recherche utilisateur dans notre fichier `index.ts`
+
+### Register
+
+-   [x] Nous avons ajouté un endpoint pour le register
+-   [x] Sur le même principe que le `login`, nous avons ajouter un utilisateur dans notre db.
+-   [ ] Nous allons devoir hasher le mot de passe de l'utilisateur avant de l'ajouter dans la db.
+-   [ ] Nous devons créer un token pour l'utilisateur qui vient de se loguer.
