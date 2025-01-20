@@ -40,3 +40,19 @@ npx tsc --init
 npm install @types/node
 npm install ts-node-dev --save-dev
 ```
+
+---
+
+### Login
+
+-   [x] Nous avons besoin d'un middleware d'express pour lire les information de `req.body`. J'utilise le middleware `express.json()`.
+
+Nous avons jusqu'a présent fait ce cycle là:
+
+![v0](./docs/auth_login_v0.png)
+
+Et notre but, c'est de faire ça :
+
+![v1](./docs/auth_login.png)
+
+Nous allons donc installer un module npmjs pour configurer notre bdd et ainsi pouvoir faire des requêtes sur celle ci.
