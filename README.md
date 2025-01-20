@@ -31,9 +31,7 @@ npx tsc --init
 ```
 
 -   [x] Ne pas oublier de faire un `git init` (et un .gitignore) pour initialiser le projet.
-
 -   [x] Creation de mon serveur express. [Express - Node.js web application framework](https://expressjs.com/)
-
 -   [x] Nous allons devoir compiler notre code, j'ajoute donc quelques package pour que celui ci fonctionne correctement.
 
 ```shell
