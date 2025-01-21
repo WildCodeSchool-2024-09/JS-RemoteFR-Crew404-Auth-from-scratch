@@ -6,6 +6,7 @@ function App() {
 			<nav>
 				<Link to="/login">Login</Link>
 				<Link to="/register">Register</Link>
+				<Link to="/check">Check</Link>
 			</nav>
 			<Outlet />
 		</section>

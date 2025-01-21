@@ -1,9 +1,18 @@
 import express, { Request, Response } from "express";
-import connection from "../database/config";
 import cookieParser from "cookie-parser";
+import cors from "cors";
+import connection from "../database/config";
 
 const app = express();
 const port = 3310;
+
+app.use(
+	cors({
+		origin: "http://localhost:3000",
+		// Ajout de l'option pour envoyer et receptionner des cookies
+		credentials: true,
+	})
+);
 
 /**
  * Import middleware
@@ -44,7 +53,10 @@ app.post("/login", middlewarePwd.verifyPwd, (req: Request, res: Response) => {
 
 	const token = jwt.createToken(req.user);
 
-	res.cookie("user_token", token).json(req.user);
+	res.cookie("user_token", token, {
+		httpOnly: true,
+		secure: false,
+	}).json(req.user);
 });
 
 /**

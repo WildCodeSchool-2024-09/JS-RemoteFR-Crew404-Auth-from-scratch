@@ -100,4 +100,8 @@ Attention, dans notre middleware, nous ajoutons une clé `user` dans notre objet
 
 ### Token
 
-⚠️ Il faut que je note tous les éléments pour le token :)
+-   [x] Nous avons installé le package `jsonwebtoken` pour créer un token pour l'utilisateur. [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+-   [x] Nous avons ajouté un middleware pour créer un token pour l'utilisateur.
+    -   Toutes les informations sont dans le fichier [jwtMiddleware.ts](./server/middlewares/jwtMiddleware.ts)
+-   [x] Nous avons ajouté un middleware pour vérifier le token de l'utilisateur.
+    -   Toutes les informations sont dans le fichier [jwtMiddleware.ts](./server/middlewares/jwtMiddleware.ts)
