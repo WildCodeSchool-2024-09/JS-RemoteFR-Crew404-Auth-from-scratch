@@ -97,3 +97,7 @@ Attention, dans notre middleware, nous ajoutons une clé `user` dans notre objet
 
 -   [x] Nous avons surchargé le type de notre objet `req`.
     -   Toutes les informations sont dans le fichier [index.d.ts](./server/types/index.d.ts)
+
+### Token
+
+⚠️ Il faut que je note tous les éléments pour le token :)
