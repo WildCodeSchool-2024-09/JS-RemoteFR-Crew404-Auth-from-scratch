@@ -182,3 +182,9 @@ axios.get("http://localhost:3310/check",
 ```ts
 res.clearCookie("token");
 ```
+
+### Tips, envoi d'un email (coté serveur)
+
+-   [x] Nous avons installé le package `nodemailer` pour envoyer un email à l'utilisateur.
+-   [x] Ajouter dans notre .env les donnees concernant mes donnees de connexion à mon client email. (mailjet)[https://app.mailjet.com/dashboard]
+-   [ ]
