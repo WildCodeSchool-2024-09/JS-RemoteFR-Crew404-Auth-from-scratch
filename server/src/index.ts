@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import connection from "../database/config";
+import fs from "node:fs";
 
 const app = express();
 const port = 3310;
@@ -19,6 +20,8 @@ app.use(
  */
 import middlewarePwd from "../middlewares/hashPwd";
 import jwt from "../middlewares/jwtMiddleware";
+import { transporter } from "../config/mailer";
+import path from "node:path";
 
 /**
  * Route de base
@@ -98,6 +101,66 @@ app.get("/check", (req: Request, res: Response) => {
 	}
 	const token = jwt.verifyToken(req.cookies.user_token);
 	res.json({ message: "c'est good !" });
+});
+
+/**
+ * Route pour envoyer un email
+ * Path: /mail
+ * Action: callBack
+ * Methode: POST
+ */
+app.post("/mail", async (req: Request, res: Response) => {
+	try {
+		// send mail with defined transport object
+		const info = await transporter.sendMail({
+			from: "anthony.gorski@wildcodeschool.com", // sender address
+			to: req.body.dest, // list of receivers
+			subject: req.body.subject, // Subject line
+			text: req.body.content, // plain text body
+			// html: `<b>${req.body.content}</b>`, // html body
+		});
+
+		console.log("Message sent: %s", info.messageId);
+		// Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+		res.json({ message: "Mail send 🤟" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Server error" });
+	}
+});
+
+/**
+ * Route pour envoyer un email de remerciement avec un template HTML
+ * Path: /mail/register
+ * Action: callBack
+ * Methode: POST
+ */
+app.post("/mail/register", async (req: Request, res: Response) => {
+	try {
+		/**
+		 * Pour lire le fichier HTML, il faut importer le module fs & path de node
+		 * fs permet de lire le fichier
+		 * path permet de construire le chemin du fichier
+		 */
+		const htmlStream = fs.readFileSync(
+			path.join(__dirname, "../template/thankyou.html"),
+			"utf8"
+		);
+
+		const info = await transporter.sendMail({
+			from: "anthony.gorski@wildcodeschool.com",
+			to: req.body.dest,
+			subject: "Merci pour ton soutien",
+			text: req.body.content,
+			html: htmlStream,
+		});
+
+		console.log("Message sent: %s", info.messageId);
+		res.json({ message: "Mail envoyé 🤟" });
+	} catch (error) {
+		console.error(error);
+		res.status(500).json({ message: "Erreur serveur" });
+	}
 });
 
 /**
